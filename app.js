@@ -9,13 +9,20 @@ var budgetController = (function() {
 
 //UI CONTROLLER
 var UIController = (function() {
-  //Some code
+  return {
+    getinput: funtion() {
+      //will be either inc or exp
+        var type = document.querySelector('.add__type').value;
+        var description = document.querySelector('.add__description').value;
+        var value = document.querySelector('.add__value').value;
+    }
+  };
 })();
 
 //GLOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
 
-  var ctrlAddItem = function(){
+  var ctrlAddItem = function() {
     // 1. Get the field input data
     // 2. Add the tem to the budget controller
     // 3. Add the item to the UI
