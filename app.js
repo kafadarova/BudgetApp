@@ -2,7 +2,32 @@
 //creating a controller module using IIEF - immediately invoked expression function
 //IIFE allow data pravicy because it creates a new scope that is not visible from outside scope
 var budgetController = (function() {
-  // Some code
+  //function Constructor Expense
+  var Expense = function(id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+  //function Constructor Income
+  var Income = function(id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+
+  var totalExpenses = 0;
+
+  var data = {
+    allItems: {
+      exp: [],
+      inc: []
+    },
+    totals: {
+      exp: 0,
+      inc: 0
+    }
+  }
+
 })();
 
 //module = function expression
