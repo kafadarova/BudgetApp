@@ -70,6 +70,7 @@ var controller = (function(budgetCtrl, UICtrl) {
     //keypress event doesnt happen on any specific element, but on the global web page (anywhere on the document)
     document.addEventListener('keypress', function(event) {
       if (event.keyCode === 13 || event.which === 13) {
+        event.preventDefault();
         ctrlAddItem();
       }
     });
