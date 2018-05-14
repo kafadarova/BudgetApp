@@ -27,7 +27,15 @@ var budgetController = (function() {
       inc: 0
     }
   }
-
+  //creating a public method - so other modulles will be allowed to add new data to their data structure
+  //returning an object which contain all of the public methods
+  return {
+    addItem: function(type, des, val) {
+      var newItem;
+      
+      newItem = new Expense(ID, des, val);
+    }
+  }
 })();
 
 //module = function expression
