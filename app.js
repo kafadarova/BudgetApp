@@ -31,9 +31,17 @@ var budgetController = (function() {
   //returning an object which contain all of the public methods
   return {
     addItem: function(type, des, val) {
-      var newItem;
-      
-      newItem = new Expense(ID, des, val);
+      var newItem, ID;
+      ID = 0;
+      if (type === 'exp') {
+        newItem = new Expense(ID, des, val);
+      } else if (type === 'inc') {
+        newItem = new Income(ID, des, val);
+      }
+      //with [type] we will select one of the arrays in the object allItems
+      data.allItems[type].push(newItem);
+      //returning the newItem so the other modulles will have access to it
+      return newItem;
     }
   }
 })();
