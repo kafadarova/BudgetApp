@@ -32,7 +32,10 @@ var budgetController = (function() {
   return {
     addItem: function(type, des, val) {
       var newItem, ID;
-      ID = 0;
+      //an unique number wee want to asing to each new exp or inc
+      //IID = last ID + 1;
+      ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+
       if (type === 'exp') {
         newItem = new Expense(ID, des, val);
       } else if (type === 'inc') {
