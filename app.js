@@ -32,16 +32,22 @@ var budgetController = (function() {
   return {
     addItem: function(type, des, val) {
       var newItem, ID;
+
       //an unique number wee want to asing to each new exp or inc
       //IID = last ID + 1;
+      //create a new ID
       ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
 
+      //Create a new item based on 'inc' or 'exp' type
       if (type === 'exp') {
         newItem = new Expense(ID, des, val);
       } else if (type === 'inc') {
         newItem = new Income(ID, des, val);
       }
+
       //with [type] we will select one of the arrays in the object allItems
+      //Push it into our data structure
+      
       data.allItems[type].push(newItem);
       //returning the newItem so the other modulles will have access to it
       return newItem;
