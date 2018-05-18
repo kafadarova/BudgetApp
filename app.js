@@ -47,7 +47,7 @@ var budgetController = (function() {
 
       //with [type] we will select one of the arrays in the object allItems
       //Push it into our data structure
-      
+
       data.allItems[type].push(newItem);
       //returning the newItem so the other modulles will have access to it
       return newItem;
@@ -107,6 +107,7 @@ var controller = (function(budgetCtrl, UICtrl) {
     var input = UICtrl.getinput();
 
     // 2. Add the tem to the budget controller
+    budgetCtrl.addItem(input.type, input.description, input.value);
     // 3. Add the item to the UI
     // 4. Calculate the budget
     // 5. Display the budget
