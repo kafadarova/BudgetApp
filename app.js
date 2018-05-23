@@ -107,6 +107,23 @@ var UIController = (function() {
       //beforeend = right before the closing tag as a last child in the list
       document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
     },
+    //after adding an input we need to clear the input field
+    clearFields: function() {
+      var fields, fieldsArr;
+
+      fields = document.querySelectorAll(DOMstrings.inputDescription + ', ' + DOMstrings.inputValue);
+      //Array - function constructor for all arrays
+      //all methods, which the arrays inherite, are in arrays prootype prorperty
+      //tricking the slice method that we are giving an array, but 'fields' is actually a list
+     fieldsArr =  Array.prototype.slice.call(fields);
+
+     fieldsArr.forEach(function(current, index, array) {
+       current.value = "";
+     });
+     //set the focus on the first element of the array
+     fieldsArr[0].focus();
+    },
+
     //exposing the DOMstrings to the public
     getDOMstrings: function() {
       return DOMstrings;
@@ -146,6 +163,10 @@ var controller = (function(budgetCtrl, UICtrl) {
 
     // 3. Add the item to the UI
     UICtrl.addListItem(newItem, input.type);
+
+    // 4. Clear the fields;
+    clearFields();
+
     // 4. Calculate the budget
     // 5. Display the budget
   };
