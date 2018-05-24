@@ -150,7 +150,14 @@ var controller = (function(budgetCtrl, UICtrl) {
       }
     });
   };
+  var updateBudget = function() {
 
+        // 1. Calculate the budget
+
+        // 2. Return the budget
+
+        // 3. Display the budget
+  }
 
   var ctrlAddItem = function() {
     var input, newItem;
@@ -167,8 +174,8 @@ var controller = (function(budgetCtrl, UICtrl) {
     // 4. Clear the fields;
     clearFields();
 
-    // 4. Calculate the budget
-    // 5. Display the budget
+    // 5. Calculate and update budget
+    updateBudget();
   };
 
   //public function - so we will return it into an object
