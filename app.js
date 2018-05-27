@@ -80,7 +80,8 @@ var UIController = (function() {
         //will be either inc or exp
         type: document.querySelector(DOMstrings.inputType).value,
         description: document.querySelector(DOMstrings.inputDescription).value,
-        value: document.querySelector(DOMstrings.inputValue).value
+        //use the function parseFloat - convert a string to a floating number
+        value: parseFloat(document.querySelector(DOMstrings.inputValue).value)
       };
     },
 
