@@ -116,13 +116,13 @@ var UIController = (function() {
       //Array - function constructor for all arrays
       //all methods, which the arrays inherite, are in arrays prootype prorperty
       //tricking the slice method that we are giving an array, but 'fields' is actually a list
-     fieldsArr =  Array.prototype.slice.call(fields);
+      fieldsArr = Array.prototype.slice.call(fields);
 
-     fieldsArr.forEach(function(current, index, array) {
-       current.value = "";
-     });
-     //set the focus on the first element of the array
-     fieldsArr[0].focus();
+      fieldsArr.forEach(function(current, index, array) {
+        current.value = "";
+      });
+      //set the focus on the first element of the array
+      fieldsArr[0].focus();
     },
 
     //exposing the DOMstrings to the public
@@ -153,11 +153,11 @@ var controller = (function(budgetCtrl, UICtrl) {
   };
   var updateBudget = function() {
 
-        // 1. Calculate the budget
+    // 1. Calculate the budget
 
-        // 2. Return the budget
+    // 2. Return the budget
 
-        // 3. Display the budget
+    // 3. Display the budget
   }
 
   var ctrlAddItem = function() {
@@ -166,17 +166,21 @@ var controller = (function(budgetCtrl, UICtrl) {
     // 1. Get the field input data
     input = UICtrl.getinput();
 
-    // 2. Add the item to the budget controller
-    newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+    //input description should not be empty and the number should actually be a number
+    if (input.description !== "" && !isNan(input.value) && input.value > 0) {
+      // 2. Add the item to the budget controller
+      newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
-    // 3. Add the item to the UI
-    UICtrl.addListItem(newItem, input.type);
+      // 3. Add the item to the UI
+      UICtrl.addListItem(newItem, input.type);
 
-    // 4. Clear the fields;
-    UICtrl.clearFields();
+      // 4. Clear the fields;
+      UICtrl.clearFields();
 
-    // 5. Calculate and update budget
-    updateBudget();
+      // 5. Calculate and update budget
+      updateBudget();
+    }
+    
   };
 
   //public function - so we will return it into an object
