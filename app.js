@@ -17,6 +17,7 @@ var budgetController = (function() {
 
   var totalExpenses = 0;
 
+//creating an array with two objects
   var data = {
     allItems: {
       exp: [],
@@ -180,7 +181,7 @@ var controller = (function(budgetCtrl, UICtrl) {
       // 5. Calculate and update budget
       updateBudget();
     }
-    
+
   };
 
   //public function - so we will return it into an object
