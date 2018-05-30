@@ -57,6 +57,7 @@ var budgetController = (function() {
       //returning the newItem so the other modulles will have access to it
       return newItem;
     },
+    //create a test method to check in console, when we called the method, the object data
     testing: function() {
       console.log(data);
     }
