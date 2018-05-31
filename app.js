@@ -87,6 +87,7 @@ var UIController = (function() {
       };
     },
 
+//add an element to the list of our exp and income 
     addListItem: function(obj, type) {
       var html, newHtml, element;
       //Create HTML string with placeholder text
