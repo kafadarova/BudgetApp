@@ -57,6 +57,11 @@ var budgetController = (function() {
       //returning the newItem so the other modulles will have access to it
       return newItem;
     },
+    //first calculate all of the incomes and expenses - total income and total expense
+    // budget = income - expense
+    calculateBudget: function() {
+
+    },
     //create a test method to check in console, when we called the method, the object data
     testing: function() {
       console.log(data);
@@ -87,7 +92,7 @@ var UIController = (function() {
       };
     },
 
-//add an element to the list of our exp and income 
+//add an element to the list of our exp and income
     addListItem: function(obj, type) {
       var html, newHtml, element;
       //Create HTML string with placeholder text
