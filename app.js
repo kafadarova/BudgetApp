@@ -15,9 +15,19 @@ var budgetController = (function() {
     this.value = value;
   };
 
+  //private function - check if income or expense
+  var calculateTotal = function(type) {
+    //sum variable stores the sum
+    var sum = 0;
+    data.allItems[type].forEach(function(cur) {
+      sum += cur.value;
+    });
+    data.totals[type] = sum;
+  }
+
   var totalExpenses = 0;
 
-//creating an array with two objects
+  //creating an array with two objects
   var data = {
     allItems: {
       exp: [],
@@ -61,6 +71,12 @@ var budgetController = (function() {
     // budget = income - expense
     calculateBudget: function() {
 
+      // Calculate total income and expenses
+
+      // Calculate the budget: income - expenses
+
+      // Calculate the percentage of income that we spent
+
     },
     //create a test method to check in console, when we called the method, the object data
     testing: function() {
@@ -92,7 +108,7 @@ var UIController = (function() {
       };
     },
 
-//add an element to the list of our exp and income
+    //add an element to the list of our exp and income
     addListItem: function(obj, type) {
       var html, newHtml, element;
       //Create HTML string with placeholder text
