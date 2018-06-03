@@ -72,6 +72,9 @@ var budgetController = (function() {
     calculateBudget: function() {
 
       // Calculate total income and expenses
+      //after running the code below - the data array.total - exp or inc - will be not equal to 0
+      calculateTotal('exp');
+      calculateTotal('inc');
 
       // Calculate the budget: income - expenses
 
