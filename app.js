@@ -36,7 +36,11 @@ var budgetController = (function() {
     totals: {
       exp: 0,
       inc: 0
-    }
+    },
+    budget: 0,
+    //-1 means that it is nonexistent
+    //if there are no budget values or total exp or inc
+    percentage: -1
   }
   //creating a public method - so other modulles will be allowed to add new data to their data structure
   //returning an object which contain all of the public methods
@@ -76,9 +80,11 @@ var budgetController = (function() {
       calculateTotal('exp');
       calculateTotal('inc');
 
-      // Calculate the budget: income - expenses
+      // Calculate the budget: income - expenses and then stores the variable again in the ata budget
+      data.budget = Math.round((data.totals.inc - data.totals.exp) * 100);
 
       // Calculate the percentage of income that we spent
+      data.percentage = data.totals.exp / data.total.inc;
 
     },
     //create a test method to check in console, when we called the method, the object data
