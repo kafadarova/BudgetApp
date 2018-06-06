@@ -87,6 +87,16 @@ var budgetController = (function() {
       data.percentage = data.totals.exp / data.total.inc;
 
     },
+    //return the budget, total inc and exp, the percentage
+    getBudget: function() {
+      return {
+        budget: data.budget,
+        totalInc: data.totals.inc,
+        totalExp: data.totals.exp,
+        percentage: data.percentage
+      }
+    },
+
     //create a test method to check in console, when we called the method, the object data
     testing: function() {
       console.log(data);
@@ -187,10 +197,11 @@ var controller = (function(budgetCtrl, UICtrl) {
   var updateBudget = function() {
 
     // 1. Calculate the budget
-
+    budgetCtrl.calculateBudget();
     // 2. Return the budget
-
-    // 3. Display the budget
+    vat budget = budgetCtrl.getBudget();
+    // 3. Display the budget on the UI
+    console.log(budget);
   }
 
   var ctrlAddItem = function() {
