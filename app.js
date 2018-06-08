@@ -84,8 +84,13 @@ var budgetController = (function() {
       data.budget = Math.round((data.totals.inc - data.totals.exp) * 100);
 
       // Calculate the percentage of income that we spent
-      data.percentage = data.totals.exp / data.total.inc;
-
+      // calculate only when we have already added an item
+      if (data.totals.inc > 0) {
+        data.percentage = data.totals.exp / data.total.inc;
+      } else {
+        //when it is equal to -1 that means that is basically the nonexistent
+        data.percentage = -1;
+      }
     },
     //return the budget, total inc and exp, the percentage
     getBudget: function() {
@@ -166,6 +171,10 @@ var UIController = (function() {
       });
       //set the focus on the first element of the array
       fieldsArr[0].focus();
+    },
+    
+    displayBudget: function(obj) {
+
     },
 
     //exposing the DOMstrings to the public
