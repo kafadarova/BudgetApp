@@ -119,7 +119,7 @@ var UIController = (function() {
     inputValue: '.add__value',
     inputBtn: '.add__btn',
     incomeContainer: '.income__list',
-    expensesContainer: '.expenses__list'
+    expensesContainer: '.budget__value'
   }
   return {
     getinput: function() {
@@ -172,7 +172,7 @@ var UIController = (function() {
       //set the focus on the first element of the array
       fieldsArr[0].focus();
     },
-    
+
     displayBudget: function(obj) {
 
     },
