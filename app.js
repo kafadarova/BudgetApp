@@ -120,7 +120,7 @@ var UIController = (function() {
     inputBtn: '.add__btn',
     incomeContainer: '.income__list',
     expensesContainer: '.expenses__list',
-    budgetLabel :'.budget__value',
+    budgetLabel: '.budget__value',
     incomeLabel: '.budget__income--value',
     expenseLabel: '.budget__expenses--value',
     percentageLabel: '.budget__expenses--percentage'
@@ -181,7 +181,13 @@ var UIController = (function() {
       document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
       document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
       document.querySelector(DOMstrings.expenseLabel).textContent = obj.totalExp;
-      document.querySelector(DOMstrings.percentageLabel).textContent = obj.percentage;
+
+      //percentage is only shown when it is greater than 0
+      if (obj.percentage > 0) {
+        document.querySelector(DOMstrings.percentageLabel).textContent = obj.percentage + '%';
+      } else {
+        document.querySelector(DOMstrings.percentageLabel).textContent = '---';
+      }
     },
 
     //exposing the DOMstrings to the public
