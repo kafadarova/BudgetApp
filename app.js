@@ -198,6 +198,7 @@ var UIController = (function() {
 })();
 
 //GLOBAL APP CONTROLLER
+// pass both others controllers and asign them to the parametes in iief
 var controller = (function(budgetCtrl, UICtrl) {
 
   //set up an event listeners
