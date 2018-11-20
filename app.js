@@ -261,7 +261,7 @@ var controller = (function(budgetCtrl, UICtrl) {
         budget: 0,
         totalInc: 0,
         totalExp: 0,
-        percentage: -1
+        percentage: -1 //there is no percentage at all
       });
       setupEventListeners();
     }
