@@ -92,7 +92,7 @@ var budgetController = (function() {
         data.percentage = -1;
       }
     },
-    //return the budget, total inc and exp, the percentage
+    // create an object - return the budget, total inc and exp, the percentage
     getBudget: function() {
       return {
         budget: data.budget,
@@ -177,6 +177,7 @@ var UIController = (function() {
       fieldsArr[0].focus();
     },
 
+// Call an object where to whole data is stored
     displayBudget: function(obj) {
       document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
       document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
@@ -222,7 +223,7 @@ var controller = (function(budgetCtrl, UICtrl) {
     // 1. Calculate the budget
     budgetCtrl.calculateBudget();
     // 2. Return the budget
-    vat budget = budgetCtrl.getBudget();
+    var budget = budgetCtrl.getBudget();
     // 3. Display the budget on the UI
     // console.log(budget);
     UICtrl.displayBudget(budget);
@@ -235,7 +236,7 @@ var controller = (function(budgetCtrl, UICtrl) {
     input = UICtrl.getinput();
 
     //input description should not be empty and the number should actually be a number
-    if (input.description !== "" && !isNan(input.value) && input.value > 0) {
+    if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
       // 2. Add the item to the budget controller
       newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
