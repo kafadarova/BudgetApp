@@ -123,7 +123,8 @@ var UIController = (function() {
     budgetLabel: '.budget__value',
     incomeLabel: '.budget__income--value',
     expenseLabel: '.budget__expenses--value',
-    percentageLabel: '.budget__expenses--percentage'
+    percentageLabel: '.budget__expenses--percentage',
+    container: '.container'
   }
   return {
     getinput: function() {
@@ -217,6 +218,8 @@ var controller = (function(budgetCtrl, UICtrl) {
         ctrlAddItem();
       }
     });
+    // Add an event listener for the parent element of the income/expense delete button
+    document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
   };
   var updateBudget = function() {
 
