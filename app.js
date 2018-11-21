@@ -203,15 +203,15 @@ var UIController = (function() {
 // pass both others controllers and asign them to the parametes in iief
 var controller = (function(budgetCtrl, UICtrl) {
 
-  //set up an event listeners
+  // Set up an event listeners
   var setupEventListeners = function() {
 
-    //get the DOM strings and stored them into the var called DOM
+    // Get the DOM strings and stored them into the var called DOM
     var DOM = UICtrl.getDOMstrings();
 
-    //event listener for input button
+    // Event listener for input button
     document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
-    //keypress event doesnt happen on any specific element, but on the global web page (anywhere on the document)
+    // Keypress event doesnt happen on any specific element, but on the global web page (anywhere on the document)
     document.addEventListener('keypress', function(event) {
       if (event.keyCode === 13 || event.which === 13) {
         event.preventDefault();
@@ -253,6 +253,12 @@ var controller = (function(budgetCtrl, UICtrl) {
       updateBudget();
     }
 
+  };
+
+// add a name function for the event passing as parameter the event object
+  var ctrlDeleteItem = function(event) {
+    
+    console.log(event.target);
   };
 
   //public function - so we will return it into an object
