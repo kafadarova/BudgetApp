@@ -86,7 +86,7 @@ var budgetController = (function() {
       // Calculate the percentage of income that we spent
       // calculate only when we have already added an item
       if (data.totals.inc > 0) {
-        data.percentage = data.totals.exp / data.total.inc;
+        data.percentage = data.totals.exp / data.totals.inc;
       } else {
         //when it is equal to -1 that means that is basically the nonexistent
         data.percentage = -1;
@@ -144,11 +144,11 @@ var UIController = (function() {
       if (type === 'inc') {
         element = DOMstrings.incomeContainer;
 
-        html = '<div class="item clearfix" id="income-%id%"><div class="item__description">%description%</div><div class="right clearfix"> <div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div></div> </div>'
+        html = '<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"> <div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div></div> </div>'
       } else if (type === 'exp') {
         element = DOMstrings.expensesContainer;
 
-        html = '<div class="item clearfix" id="expense-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+        html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
       }
 
       //Replace the placeholder text with some actual data
@@ -257,8 +257,21 @@ var controller = (function(budgetCtrl, UICtrl) {
 
 // add a name function for the event passing as parameter the event object
   var ctrlDeleteItem = function(event) {
-    
-    console.log(event.target);
+    var itemID, splitID, type, ID;
+    itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
+
+      if(itemID) {
+          // inc-1
+          splitID = itemID.split('-');
+          type = splitID[0];
+          ID = splitID[1];
+
+          // 1. Delete the item from the data structure
+
+          // 2. Delete the item from the UI
+
+          // 3. Update and show the new budget
+    }
   };
 
   //public function - so we will return it into an object
