@@ -298,9 +298,12 @@ var controller = (function(budgetCtrl, UICtrl) {
 
           // 1. Delete the item from the data structure
           budgetCtrl.deleteItem(type, ID);
-          // 2. Delete the item from the UI
 
+          // 2. Delete the item from the UI
+          UICtrl.deleteListItem(itemID);
+          
           // 3. Update and show the new budget
+          updateBudget();
     }
   };
 
