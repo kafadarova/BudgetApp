@@ -184,6 +184,13 @@ var UIController = (function() {
       //beforeend = right before the closing tag as a last child in the list
       document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
     },
+    //
+    deleteListItem: function(selectorID) {
+      // we can remove only a child, so we move up to the parent node
+      var el = document.getElementById(selectorID);
+      el.parentNode.removeChild(el);
+    },
+
     //after adding an input we need to clear the input field
     clearFields: function() {
       var fields, fieldsArr;
