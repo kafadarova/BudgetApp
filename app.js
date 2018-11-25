@@ -7,8 +7,24 @@ var budgetController = (function() {
     this.id = id;
     this.description = description;
     this.value = value;
+    this.percentage = -1; // when is not defined
   };
-  //function Constructor Income
+
+  // Add the method to the Expense object prototype to calculate the percentage
+  Expense.prototype.calcPercentage = function(totalIncome){
+    if(totalIncome > 0){
+      this.percentage = Math.round((this.value / totalIncome) * 100);
+    } else {
+      this.percentage = -1;
+    }
+  };
+
+  // Retrieve and return the percentage from the expense object
+  Expense.prototype.getPercentage = function() {
+    return this.percentage;
+  };
+
+  // function Constructor Income
   var Income = function(id, description, value) {
     this.id = id;
     this.description = description;
@@ -104,17 +120,34 @@ var budgetController = (function() {
       calculateTotal('inc');
 
       // Calculate the budget: income - expenses and then stores the variable again in the ata budget
-      data.budget = Math.round((data.totals.inc - data.totals.exp) * 100);
+      data.budget = data.totals.inc - data.totals.exp;
 
       // Calculate the percentage of income that we spent
       // calculate only when we have already added an item
       if (data.totals.inc > 0) {
-        data.percentage = data.totals.exp / data.totals.inc;
+         data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
       } else {
         //when it is equal to -1 that means that is basically the nonexistent
         data.percentage = -1;
       }
     },
+
+    // Calculate percentages
+    calculatePercentages: function() {
+      // Loop over the expense array
+      data.allItems.exp.forEach(function(cur) {
+        cur.calcPercentage(data.totals.inc);
+      })
+    },
+
+    // Call this method on each of the expense objects
+    getPercentages: function(){
+      var allPerc = data.allItems.exp.map(function(cur) {
+        return cur.getPercentage();
+      });
+      return allPerc;
+    },
+
     // create an object - return the budget, total inc and exp, the percentage
     getBudget: function() {
       return {
@@ -254,10 +287,13 @@ var controller = (function(budgetCtrl, UICtrl) {
 
   var updatePercentages = function() {
     // 1. Calculate percentage
+    budgetCtrl.calculatePercentages();
 
     // 2. Read percentages from the budget controller
+    var percentages = budgetCtrl.getPercentages();
 
     // 3. Update the UI with the new percentages
+    console.log(percentages);
   }
 
   var updateBudget = function() {
