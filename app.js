@@ -181,7 +181,7 @@ var UIController = (function() {
     expenseLabel: '.budget__expenses--value',
     percentageLabel: '.budget__expenses--percentage',
     container: '.container',
-    expensesPercLabel: 'item__percentage'
+    expensesPercLabel: '.item__percentage'
   }
   return {
     getinput: function() {
@@ -256,7 +256,7 @@ var UIController = (function() {
       }
     },
     // Pass an array argument as parameter
-    displayPercentages: function(percentages){
+    displayPercentages: function(percentages) {
       // Use querySelectorAll, because we need all the percentage of all items
       // Return a node list
       var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
@@ -268,9 +268,15 @@ var UIController = (function() {
          }
       };
 
-      nodeListForEach(fields, function(current, index)) {
-        current.textContent = percentages[index];
-      }
+      nodeListForEach(fields, function(current, index) {
+
+      if (percentages[index] > 0) {
+            current.textContent = percentages[index] + '%';
+          } else {
+              current.textContent = '---';
+          }
+    });
+
     },
 
     //exposing the DOMstrings to the public
@@ -303,17 +309,6 @@ var controller = (function(budgetCtrl, UICtrl) {
     document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
   };
 
-  var updatePercentages = function() {
-    // 1. Calculate percentage
-    budgetCtrl.calculatePercentages();
-
-    // 2. Read percentages from the budget controller
-    var percentages = budgetCtrl.getPercentages();
-
-    // 3. Update the UI with the new percentages
-    console.log(percentages);
-  }
-
   var updateBudget = function() {
 
     // 1. Calculate the budget
@@ -325,9 +320,19 @@ var controller = (function(budgetCtrl, UICtrl) {
     // 3. Display the budget on the UI
     // console.log(budget);
     UICtrl.displayBudget(budget);
-
-
   }
+
+
+    var updatePercentages = function() {
+      // 1. Calculate percentage
+      budgetCtrl.calculatePercentages();
+
+      // 2. Read percentages from the budget controller
+      var percentages = budgetCtrl.getPercentages();
+
+      // 3. Update the UI with the new percentages
+      UICtrl.displayPercentages(percentages);
+    }
 
   var ctrlAddItem = function() {
     var input, newItem;
