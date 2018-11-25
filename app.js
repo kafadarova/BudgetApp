@@ -180,7 +180,8 @@ var UIController = (function() {
     incomeLabel: '.budget__income--value',
     expenseLabel: '.budget__expenses--value',
     percentageLabel: '.budget__expenses--percentage',
-    container: '.container'
+    container: '.container',
+    expensesPercLabel: 'item__percentage'
   }
   return {
     getinput: function() {
@@ -252,6 +253,23 @@ var UIController = (function() {
         document.querySelector(DOMstrings.percentageLabel).textContent = obj.percentage + '%';
       } else {
         document.querySelector(DOMstrings.percentageLabel).textContent = '---';
+      }
+    },
+    // Pass an array argument as parameter
+    displayPercentages: function(percentages){
+      // Use querySelectorAll, because we need all the percentage of all items
+      // Return a node list
+      var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
+
+      // Create a function to loop over the node list
+      var nodeListForEach = function(list, callback) {
+         for (var i = 0; i < list.length; i++) {
+           callback(list[i], i);
+         }
+      };
+
+      nodeListForEach(fields, function(current, index)) {
+        current.textContent = percentages[index];
       }
     },
 
