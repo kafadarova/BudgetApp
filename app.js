@@ -280,9 +280,20 @@ var UIController = (function() {
     },
   // format the number we write in the input field
     formatNumber: function(num, type) {
+      var numSplit;
+
       // + or - before the number, exactly 2 decimal points, comma separing the thousands
+
       // Abs method removes the sign of the number
       num = Math.abs(num);
+      // When using a method on a primitive, js converts them to objects
+      num = num.toFixed(2);
+
+      numSplit = num.split('.');
+
+      int = numSplit[0];
+
+      dec = numSplit[1];
 
     },
 
