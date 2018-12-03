@@ -182,7 +182,28 @@ var UIController = (function() {
     percentageLabel: '.budget__expenses--percentage',
     container: '.container',
     expensesPercLabel: '.item__percentage'
-  }
+  };
+  // format the number we write in the input field
+  var formatNumber = function(num, type) {
+      var numSplit, int, dec, type;
+
+      // + or - before the number, exactly 2 decimal points, comma separing the thousands
+
+      // Abs method removes the sign of the number
+      num = Math.abs(num);
+      // When using a method on a primitive, js converts them to objects
+      num = num.toFixed(2);
+
+      numSplit = num.split('.');
+
+      int = numSplit[0];
+      if(int.length > 3) {
+        int = int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3);
+      }
+      dec = numSplit[1];
+
+      return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
+    };
   return {
     getinput: function() {
       return {
@@ -212,7 +233,7 @@ var UIController = (function() {
       //with replace method we search for string and replace it with the data we put into the parathesis in the method
       newHtml = html.replace('%id%', obj.id);
       newHtml = newHtml.replace('%description%', obj.description);
-      newHtml = newHtml.replace('%value%', obj.value);
+      newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
 
       // Insert the HTML into the DOM
       //beforeend = right before the closing tag as a last child in the list
@@ -244,9 +265,12 @@ var UIController = (function() {
 
 // Call an object where to whole data is stored
     displayBudget: function(obj) {
-      document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
-      document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
-      document.querySelector(DOMstrings.expenseLabel).textContent = obj.totalExp;
+      var type;
+      obj.budget > 0 ? type = 'inc' : type = 'exp':
+
+      document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget, type);
+      document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
+      document.querySelector(DOMstrings.expenseLabel).textContent = formatNumber(obj.totalExp, 'exp');
 
       //percentage is only shown when it is greater than 0
       if (obj.percentage > 0) {
@@ -278,25 +302,6 @@ var UIController = (function() {
     });
 
     },
-  // format the number we write in the input field
-    formatNumber: function(num, type) {
-      var numSplit;
-
-      // + or - before the number, exactly 2 decimal points, comma separing the thousands
-
-      // Abs method removes the sign of the number
-      num = Math.abs(num);
-      // When using a method on a primitive, js converts them to objects
-      num = num.toFixed(2);
-
-      numSplit = num.split('.');
-
-      int = numSplit[0];
-
-      dec = numSplit[1];
-
-    },
-
     //exposing the DOMstrings to the public
     getDOMstrings: function() {
       return DOMstrings;
