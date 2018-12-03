@@ -181,7 +181,8 @@ var UIController = (function() {
     expenseLabel: '.budget__expenses--value',
     percentageLabel: '.budget__expenses--percentage',
     container: '.container',
-    expensesPercLabel: '.item__percentage'
+    expensesPercLabel: '.item__percentage',
+    dateLabel: '.budget__title--month'
   };
   // format the number we write in the input field
   var formatNumber = function(num, type) {
@@ -266,7 +267,7 @@ var UIController = (function() {
 // Call an object where to whole data is stored
     displayBudget: function(obj) {
       var type;
-      obj.budget > 0 ? type = 'inc' : type = 'exp':
+      obj.budget > 0 ? type = 'inc' : type = 'exp';
 
       document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget, type);
       document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
@@ -299,9 +300,19 @@ var UIController = (function() {
           } else {
               current.textContent = '---';
           }
-    });
-
+        });
     },
+
+    displayMonat: function() {
+      var now, year, months, month;
+      // return the date of today
+    now = new Date();
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    year = now.getFullYear();
+    month = now.getMonth();
+    document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
+    },
+
     //exposing the DOMstrings to the public
     getDOMstrings: function() {
       return DOMstrings;
@@ -412,6 +423,7 @@ var controller = (function(budgetCtrl, UICtrl) {
   return {
     init: function() {
       console.log('Application has started');
+      UICtrl.displayMonat();
       //set everything to zero on reload
       UICtrl.displayBudget({
         budget: 0,
