@@ -205,6 +205,14 @@ var UIController = (function() {
 
       return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
     };
+
+  // Create a function to loop over the node list
+  var nodeListForEach = function(list, callback) {
+        for (var i = 0; i < list.length; i++) {
+          callback(list[i], i);
+        }
+      };
+
   return {
     getinput: function() {
       return {
@@ -286,13 +294,6 @@ var UIController = (function() {
       // Return a node list
       var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
 
-      // Create a function to loop over the node list
-      var nodeListForEach = function(list, callback) {
-         for (var i = 0; i < list.length; i++) {
-           callback(list[i], i);
-         }
-      };
-
       nodeListForEach(fields, function(current, index) {
 
       if (percentages[index] > 0) {
@@ -312,6 +313,21 @@ var UIController = (function() {
     month = now.getMonth();
     document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
     },
+
+    // Change the outline of the 3 input fields when choose an input type
+    changedType: function() {
+      var fields = document.querySelectorAll(
+        DOMstrings.inputType + ',' +
+        DOMstrings.inputDescription+ ',' +
+        DOMstrings.inputValue
+      );
+    nodeListForEach(fields, function(cur) {
+      cur.classList.toggle('red-focus');
+    });
+    
+    // Change the outline of the tick
+    document.querySelector(DOMstrings.inputBtn).classList.toggle('red');
+  },
 
     //exposing the DOMstrings to the public
     getDOMstrings: function() {
@@ -341,6 +357,9 @@ var controller = (function(budgetCtrl, UICtrl) {
     });
     // Add an event listener for the parent element of the income/expense delete button
     document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
+
+    document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changedType);
+
   };
 
   var updateBudget = function() {
